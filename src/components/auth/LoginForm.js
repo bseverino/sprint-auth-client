@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
 
 import { axiosWithAuth } from '../../utils/axiosWithAuth'
 
@@ -36,28 +36,35 @@ const LoginForm = () => {
     }
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    name='username'
-                    aria-label='Username'
-                    placeholder='Username'
-                    value={credentials.username}
-                    onChange={handleChange}
-                />
-                <input
-                    type='password'
-                    name='password'
-                    aria-label='Password'
-                    placeholder='Password'
-                    value={credentials.password}
-                    onChange={handleChange}
-                />
-                <button>Submit</button>
-            </form>
-        </div>
+        <>
+            {sessionStorage.getItem('token') ? (
+                <Redirect to='/jokes' />
+            
+            ) : (
+                <div>
+                    <h2>Login</h2>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type='text'
+                            name='username'
+                            aria-label='Username'
+                            placeholder='Username'
+                            value={credentials.username}
+                            onChange={handleChange}
+                        />
+                        <input
+                            type='password'
+                            name='password'
+                            aria-label='Password'
+                            placeholder='Password'
+                            value={credentials.password}
+                            onChange={handleChange}
+                        />
+                        <button>Submit</button>
+                    </form>
+                </div>
+            )}
+        </>
     )
 }
 

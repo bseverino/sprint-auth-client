@@ -6,7 +6,6 @@ import JokeCard from './JokeCard'
 
 const JokeList = () => {
     const [jokes, setJokes] = useState(null)
-    console.log(jokes)
 
     useEffect(() => {
         if (!jokes) {
@@ -24,11 +23,11 @@ const JokeList = () => {
     return (
         <div>
             <h2>Jokes</h2>
-            <div>
+            <section>
                 {jokes && jokes.map(({ id, joke }) => (
                     <JokeCard key={id} joke={joke} />
                 ))}
-            </div>
+            </section>
         </div>
     )
 }
